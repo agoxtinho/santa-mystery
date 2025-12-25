@@ -123,12 +123,13 @@ body {
     👉 ACCUSE THIS SUSPECT
   </button>
 
-  <div class="result" id="result">
-    ❄️ Nice try… this suspect is innocent.
-    <br><br>
-    <a href="index.html" class="back">← Back to suspects</a>
-  </div>
+  <!-- Result message -->
+<div class="result" id="result" style="display:none;">
+  ❄️ Nice try… this suspect is innocent.
 </div>
+
+<!-- Back to suspects link (always visible) -->
+<a href="index.html" class="back">← Back to suspects</a>
 
 <script>
 function accuse() {
