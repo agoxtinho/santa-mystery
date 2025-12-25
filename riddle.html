@@ -34,9 +34,7 @@ button {
 <h1>🎄 Final Riddle 🎄</h1>
 
 <p>
-I wear red and laugh “Ho Ho Ho”,<br>
-I bring joy wherever I go.<br>
-Who was taken?
+ I am tall when I am young,<br> and short when I am old. <br>What am I?,<br>
 </p>
 
 <input id="answer" placeholder="Your answer">
@@ -46,7 +44,7 @@ Who was taken?
 <script>
 function check() {
   const a = document.getElementById("answer").value.toLowerCase();
-  if (a.includes("santa")) {
+  if (a.includes("candle")) {
     window.location.href = "ticket.html";
   } else {
     alert("❄️ Try again!");
