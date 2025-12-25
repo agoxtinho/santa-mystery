@@ -30,6 +30,7 @@ body {
 .container {
   max-width: 700px;
   margin: auto;
+  text-align: center;
 }
 
 .testimony {
@@ -37,12 +38,42 @@ body {
   padding: 25px;
   border-radius: 12px;
   font-size: 20px;
+  text-align: left;
+}
+
+.accuse {
+  display: block;
+  margin: 40px auto;
+  padding: 16px 28px;
+  font-size: 22px;
+  background: linear-gradient(135deg, #b11226, #ff3b3b);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Mountains of Christmas', cursive;
+  box-shadow: 0 0 15px rgba(255,59,59,0.6);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,59,59,0.6); }
+  50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,59,59,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,59,59,0.6); }
 }
 
 .result {
+  display: none;
   margin-top: 30px;
-  text-align: center;
   font-size: 22px;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 20px;
+  color: #ffd966;
+  font-size: 18px;
+  text-decoration: none;
 }
 </style>
 </head>
@@ -50,7 +81,7 @@ body {
 <body>
 
 <nav class="nav">
-  <a href="index.html">🏠</a>
+  <a href="index.html">🏠 Home</a>
   <a href="suspect-1.html">1</a>
   <a href="suspect-2.html">2</a>
   <a href="suspect-3.html">3</a>
@@ -64,7 +95,7 @@ body {
 </nav>
 
 <div class="container">
-  <h1>🎅 Testimony</h1>
+  <h1>🎅 Suspect Testimony</h1>
 
   <div class="testimony">
     <p>
@@ -72,11 +103,24 @@ body {
     </p>
   </div>
 
-  <div class="result">
-  🎄 Something doesn’t feel right…
+  <button onclick="accuse()" class="accuse">
+    👉 ACCUSE THIS SUSPECT
+  </button>
+
+  <div class="result" id="result">
+  🎄 This testimony doesn’t add up…
   <br><br>
-  <a href="riddle.html" style="color:#2ecc71;">Interrogate further →</a>
+  <a href="riddle.html" class="back">Interrogate further →</a>
 </div>
-  
+</div>
+
+<script>
+function accuse() {
+  if (confirm("Are you sure you want to accuse this suspect?")) {
+    document.getElementById("result").style.display = "block";
+  }
+}
+</script>
+
 </body>
 </html>
