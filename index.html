@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Kidnapped Santa?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Mountains of Christmas', cursive;
+  background: linear-gradient(#0b3d2e, #07261c);
+  color: white;
+}
+
+header, footer {
+  background: #b11226;
+  text-align: center;
+  padding: 20px;
+}
+
+section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(0,0,0,0.35);
+  padding: 20px;
+  border-radius: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+a.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #2ecc71;
+  color: black;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="jingle-bells.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+  <h1>🎄 Who Kidnapped Santa Claus? 🎄</h1>
+  <p>A playful Christmas mystery</p>
+</header>
+
+<section>
+  <h2>The Story</h2>
+  <p>
+    Santa Claus has vanished on Christmas Eve.
+    His sleigh was found abandoned.
+    Ten suspects were last seen near the workshop.
+  </p>
+  <p>Scan the QR codes. Read the testimonies. Find the kidnapper.</p>
+</section>
+
+<section>
+  <h2>The Suspects</h2>
+
+  <div class="grid">
+    <!-- Repeat as needed -->
+    <div class="card"><h3>🎅 Mrs. Claus</h3><a class="btn" href="suspect-1.html">Investigate</a></div>
+    <div class="card"><h3>🧝 Head Elf</h3><a class="btn" href="suspect-2.html">Investigate</a></div>
+    <div class="card"><h3>🦌 Rudolph</h3><a class="btn" href="suspect-3.html">Investigate</a></div>
+    <div class="card"><h3>🎁 Toy Inspector</h3><a class="btn" href="suspect-4.html">Investigate</a></div>
+    <div class="card"><h3>🍪 Cookie Supplier</h3><a class="btn" href="suspect-5.html">Investigate</a></div>
+    <div class="card"><h3>📦 Delivery Manager</h3><a class="btn" href="suspect-6.html">Investigate</a></div>
+    <div class="card"><h3>❄️ Snowman Rep</h3><a class="btn" href="suspect-7.html">Investigate</a></div>
+    <div class="card"><h3>📜 Naughty List Auditor</h3><a class="btn" href="suspect-8.html">Investigate</a></div>
+    <div class="card"><h3>🧸 Toy Prototype</h3><a class="btn" href="suspect-9.html">Investigate</a></div>
+    <div class="card"><h3>🎄 Mysterious One</h3><a class="btn" href="suspect-10.html">Investigate</a></div>
+  </div>
+</section>
+
+<footer>
+  Christmas depends on you 🎁
+</footer>
+
+</body>
+</html>
