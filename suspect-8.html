@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,43 +109,99 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>📜 Stefano</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-      I’m innocent. This operation was messy, and I don’t do messy. If I planned anything, there would be a schedule and footnotes.
-<p>
-My conflict with Santa: 
-<p>
-He allegedly made ‘superpower shoes’ for footballers who’d beat my team. I was annoyed, yes, but it’s absurd to kidnap Santa over sports.
-<p>
-When I noticed Santa was missing: 
-<p>
-Around 12:10, when the dinner pacing broke and people started drifting. In those minutes, I noticed a classic distraction: beanies, phones, laughter, everyone facing one direction. Someone could have walked into the hall without being noticed.
-<p>
-Means? 
-<p>
-I had a notebook and (yes) zip ties because I bundle documents. It sounds bad when you say it out loud, but it’s true.
-<p>
-Who I suspect: 
-<p>
-Luca. Santa threatened to ruin his career if he represented Rudolph. Santa really cannot afford to lose a lawsuit, so many of his helpers have quit these last years…
+      I’m innocent. This operation was messy, and I don’t do messy.
+      If I had planned anything, there would have been a schedule
+      and detailed footnotes.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      He allegedly made “superpower shoes” for footballers
+      who beat my team.
+      I was annoyed, yes,
+      but kidnapping Santa over sports would be ridiculous.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:10, when the dinner pacing broke
+      and people started drifting.
+      I noticed a textbook distraction:
+      beanies, phones, laughter,
+      everyone facing one direction.
+      Someone could have entered the hallway unseen.
+    </p>
+    <p><strong>Means?</strong><br>
+      I had a notebook and zip ties because I bundle documents.
+      It sounds bad when said aloud,
+      but it’s strictly administrative.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Luca.
+      Santa threatened to ruin his career
+      if he represented Rudolph.
+      Santa cannot afford a lawsuit —
+      many helpers have already quit in recent years.
+    </p>
+  </div>
 
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente. Questa operazione era disordinata,
+      e io non lavoro nel disordine.
+      Se avessi pianificato qualcosa,
+      ci sarebbero stati orari e note dettagliate.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Avrebbe creato delle “scarpe con superpoteri”
+      per i calciatori che hanno battuto la mia squadra.
+      Mi ha infastidito, certo,
+      ma rapire Babbo Natale per il calcio sarebbe assurdo.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Intorno alle 12:10, quando il ritmo della cena si è spezzato
+      e la gente ha iniziato a muoversi.
+      Ho notato una distrazione classica:
+      cappelli, telefoni, risate,
+      tutti rivolti nella stessa direzione.
+      Qualcuno avrebbe potuto entrare nel corridoio inosservato.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Avevo un taccuino e delle fascette
+      perché uso legarle per i documenti.
+      Suona male detto così,
+      ma è solo burocrazia.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Luca.
+      Babbo Natale ha minacciato di rovinargli la carriera
+      se avesse rappresentato Rudolph.
+      Babbo Natale non può permettersi una causa —
+      molti aiutanti se ne sono già andati negli ultimi anni.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
-  <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -138,6 +209,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
