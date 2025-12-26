@@ -56,6 +56,22 @@ a.btn {
   border-radius: 6px;
   font-weight: bold;
 }
+
+/* Language toggle */
+.lang-toggle {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+}
 </style>
 </head>
 
@@ -66,47 +82,85 @@ a.btn {
 </audio>
 
 <header>
-  <h1>🎄 Who Kidnapped Santa Claus? 🎄</h1>
-  <p>A playful Christmas mystery</p>
+  <h1 data-lang="en">🎄 Who Kidnapped Santa Claus? 🎄</h1>
+  <h1 data-lang="it">🎄 Chi ha rapito Babbo Natale? 🎄</h1>
+
+  <p data-lang="en">A playful Christmas mystery</p>
+  <p data-lang="it">Un mistero natalizio divertente</p>
+
+  <div class="lang-toggle">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('it')">IT</button>
+  </div>
 </header>
 
 <section>
-  <h2>The Story</h2>
-  <p>
-    Santa Claus has vanished on Christmas Eve whilst hosting a dinnerparty. 
+  <h2 data-lang="en">The Story</h2>
+  <h2 data-lang="it">La Storia</h2>
+
+  <p data-lang="en">
+    Santa Claus has vanished on Christmas Eve whilst hosting a dinner party.
     His sleigh was found abandoned near the workshop, with no sign of a struggle.
   </p>
-  <p>
-    Ten guests attended the dinnerparty. Each one has given a testimony
+
+  <p data-lang="it">
+    Babbo Natale è scomparso la vigilia di Natale mentre ospitava una cena.
+    La sua slitta è stata trovata abbandonata vicino al laboratorio, senza segni di colluttazione.
   </p>
-  <p>
-    Your mission is simple: investigate the suspects, 
-    read their statements carefully, 
+
+  <p data-lang="en">
+    Ten guests attended the dinner party. Each one has given a testimony.
+  </p>
+
+  <p data-lang="it">
+    Dieci ospiti hanno partecipato alla cena. Ognuno di loro ha rilasciato una testimonianza.
+  </p>
+
+  <p data-lang="en">
+    Your mission is simple: investigate the suspects, read their statements carefully,
     and decide who is telling the truth… and who isn’t.
+  </p>
+
+  <p data-lang="it">
+    La tua missione è semplice: indaga sui sospetti, leggi attentamente le loro dichiarazioni
+    e scopri chi dice la verità… e chi mente.
   </p>
 </section>
 
 <section>
-  <h2>The Suspects</h2>
+  <h2 data-lang="en">The Suspects</h2>
+  <h2 data-lang="it">I Sospetti</h2>
 
   <div class="grid">
-    <!-- Repeat as needed -->
-    <div class="card"><h3>🎅 Giulia</h3><a class="btn" href="suspect-1.html">Investigate</a></div>
-    <div class="card"><h3>🧝 Michael</h3><a class="btn" href="suspect-2.html">Investigate</a></div>
-    <div class="card"><h3>🦌 Carola</h3><a class="btn" href="suspect-3.html">Investigate</a></div>
-    <div class="card"><h3>🎁 Luca</h3><a class="btn" href="suspect-4.html">Investigate</a></div>
-    <div class="card"><h3>🍪 Paola</h3><a class="btn" href="suspect-5.html">Investigate</a></div>
-    <div class="card"><h3>📦 Hugo</h3><a class="btn" href="suspect-6.html">Investigate</a></div>
-    <div class="card"><h3>❄️ Nora</h3><a class="btn" href="suspect-7.html">Investigate</a></div>
-    <div class="card"><h3>📜 Stefano</h3><a class="btn" href="suspect-8.html">Investigate</a></div>
-    <div class="card"><h3>🧸 Elena</h3><a class="btn" href="suspect-9.html">Investigate</a></div>
-    <div class="card"><h3>🎄 Mavi</h3><a class="btn" href="suspect-10.html">Investigate</a></div>
+    <div class="card"><h3>🎅 Giulia</h3><a class="btn" href="suspect-1.html" data-lang="en">Investigate</a><a class="btn" href="suspect-1.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🧝 Michael</h3><a class="btn" href="suspect-2.html" data-lang="en">Investigate</a><a class="btn" href="suspect-2.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🦌 Carola</h3><a class="btn" href="suspect-3.html" data-lang="en">Investigate</a><a class="btn" href="suspect-3.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🎁 Luca</h3><a class="btn" href="suspect-4.html" data-lang="en">Investigate</a><a class="btn" href="suspect-4.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🍪 Paola</h3><a class="btn" href="suspect-5.html" data-lang="en">Investigate</a><a class="btn" href="suspect-5.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>📦 Hugo</h3><a class="btn" href="suspect-6.html" data-lang="en">Investigate</a><a class="btn" href="suspect-6.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>❄️ Nora</h3><a class="btn" href="suspect-7.html" data-lang="en">Investigate</a><a class="btn" href="suspect-7.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>📜 Stefano</h3><a class="btn" href="suspect-8.html" data-lang="en">Investigate</a><a class="btn" href="suspect-8.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🧸 Elena</h3><a class="btn" href="suspect-9.html" data-lang="en">Investigate</a><a class="btn" href="suspect-9.html" data-lang="it">Indaga</a></div>
+    <div class="card"><h3>🎄 Mavi</h3><a class="btn" href="suspect-10.html" data-lang="en">Investigate</a><a class="btn" href="suspect-10.html" data-lang="it">Indaga</a></div>
   </div>
 </section>
 
 <footer>
-  Christmas depends on you 🎁
+  <p data-lang="en">Christmas depends on you 🎁</p>
+  <p data-lang="it">Il Natale dipende da te 🎁</p>
 </footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
+</script>
 
 </body>
 </html>
