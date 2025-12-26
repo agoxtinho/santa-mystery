@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,42 +109,85 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🍪 Paola</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-      I’m innocent, and I left early—around 10:00—to meet my boyfriend. When I left, Santa was present, hosting, and extremely proud of the menu.
-<p>
-My conflict with Santa: 
-<p>
-I refused to issue a medical certificate that allowed him to renew his driving license because his eyesight wasn’t good enough. He didn’t love hearing that, but I’m a doctor, not a holiday fairy.
-When I noticed Santa was missing: 
-<p>
-I didn’t. I wasn’t there.
-  <p>
-Means? 
-<p>
-My bag has a penlight and eye drops. If you find those, congratulations: you’ve discovered… ophthalmology.
-  <p>
-Who I suspect (based on motive alone): 
-<p>
-Carola, because Santa had discovered her reindeer experiments and confronted her that same night. Also, she and Rudolph are like two peas in a pod, and well, Carola would do anything to help a friend in need.
+      I’m innocent, and I left early — around 10:00 — to meet my boyfriend.
+      When I left, Santa was present, hosting, and extremely proud of the menu.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      I refused to issue a medical certificate that would allow him
+      to renew his driving license, because his eyesight wasn’t good enough.
+      He didn’t love hearing that, but I’m a doctor — not a holiday fairy.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      I didn’t. I wasn’t there.
+    </p>
+    <p><strong>Means?</strong><br>
+      My bag contains a penlight and eye drops.
+      If you found those, congratulations —
+      you’ve discovered… ophthalmology.
+    </p>
+    <p><strong>Who I suspect (based on motive alone):</strong><br>
+      Carola. Santa had discovered her reindeer experiments
+      and confronted her that very night.
+      Also, she and Rudolph are inseparable —
+      and Carola would do anything to help a friend in need.
+    </p>
+  </div>
 
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente e me ne sono andata presto —
+      verso le 22:00 — per incontrare il mio fidanzato.
+      Quando sono uscita, Babbo Natale era presente,
+      faceva gli onori di casa ed era molto orgoglioso del menù.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Mi sono rifiutata di rilasciare un certificato medico
+      che gli permettesse di rinnovare la patente,
+      perché la sua vista non era sufficiente.
+      Non gli è piaciuto sentirlo,
+      ma io sono un medico — non una fata natalizia.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Non l’ho notata. Non ero presente.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Nella mia borsa ho una torcia oftalmologica e colliri.
+      Se li avete trovati, complimenti —
+      avete scoperto… l’oftalmologia.
+    </p>
+    <p><strong>Chi sospetto (solo per movente):</strong><br>
+      Carola. Babbo Natale aveva scoperto i suoi esperimenti sulle renne
+      e l’aveva affrontata proprio quella sera.
+      Inoltre, lei e Rudolph sono inseparabili —
+      e Carola farebbe qualsiasi cosa per aiutare un amico in difficoltà.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
- <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -137,6 +195,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
