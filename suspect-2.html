@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,42 +109,85 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🧝 Michael</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-      I’m innocent. I arrived late (about 9:15) with Giulia. Santa spent half the night asking about my beanies like they were classified documents.
-    <p>   
-      My conflict with Santa: 
+      I’m innocent. I arrived late (about 9:15) with Giulia. Santa spent half the night
+      asking about my beanies like they were classified documents.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      Honestly, none — except that he kept trying to get my beanie sources out of me.
+      I did not consider that kidnapping-worthy.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:10, when someone told me, “Go get Santa,” and I realized he wasn’t in the kitchen.
+      In those minutes I went to the cloakroom area because everyone wanted a beanie for the photo.
+      I remember the coat door opening, people shuffling, then sitting back down and realizing
+      dessert still wasn’t coming.
+    </p>
+    <p><strong>Means?</strong><br>
+      I had a sewing kit and pins because beanies snag and people rip things at parties.
+      If you found a needle or safety pin later, that’s me being prepared — not evil.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Stefano. He observed everything like he was building a case
+      and kept ranting about the last Genoa–Sampdoria match,
+      convinced Santa somehow rigged it with magic shoes.
+    </p>
+  </div>
+
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
     <p>
-      Honestly, none—except he kept trying to get my beanie sources out of me. I did not take that as kidnapping‑worthy.
-    <p>  
-      When I noticed Santa was missing:
-    <p>
-      Around 12:10, when someone told me, ‘Go get Santa,’ and I realized he wasn’t in the kitchen. In those minutes I went to the cloakroom area because everyone wanted a beanie for the photo. I remember the coat door opening, people shuffling, and then sitting back down and realizing dessert still wasn’t coming.
-    <p>  
-      Means? 
-    <p>
-      I had a sewing kit and pins because beanies snag and people rip things at parties. If you found a needle or safety pin later, that’s… me being prepared, not me being evil.
-    <p>  
-      Who I suspect: 
-    <p>
-      Stefano. He watched everything like he was taking mental notes for a trial and kept going on about the last football match between Genoa and Sampdoria. He seems convinced that somehow, Santa rigged the game, with some magic shoes or whatnot?
+      Sono innocente. Sono arrivato tardi (verso le 21:15) con Giulia.
+      Babbo Natale ha passato metà della serata a interrogarmi
+      sui miei cappellini come fossero documenti top secret.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Onestamente nessuno — a parte il fatto che cercava continuamente
+      di scoprire da dove provengono i miei cappellini.
+      Non mi sembrava un motivo valido per un rapimento.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Verso le 12:10, quando qualcuno mi ha detto “Vai a prendere Babbo Natale”
+      e ho capito che non era in cucina.
+      In quei minuti ero al guardaroba perché tutti volevano un cappellino per la foto.
+      Ricordo la porta che si apriva, gente che si muoveva,
+      poi di nuovo a sedere… e il dessert che non arrivava.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Avevo con me un kit da cucito e delle spille,
+      perché i cappellini si impigliano e alle feste si strappa sempre qualcosa.
+      Se avete trovato un ago o una spilla, ero solo preparato — non malvagio.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Stefano. Osservava tutto come se stesse preparando un processo
+      e continuava a parlare dell’ultima partita Genoa–Sampdoria,
+      convinto che Babbo Natale l’avesse truccata con delle scarpe magiche.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
-  <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -137,6 +195,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
