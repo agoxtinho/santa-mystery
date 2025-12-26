@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,43 +109,97 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🎁 Luca</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-      I’m innocent. I arrived with Carola around 9:15 (I went to the gym first). Dinner was social, but Santa and I have history because of the working‑conditions dispute.
-<p>
-My conflict with Santa: 
-<p>
-It’s real. Rudolph asked me for legal advice and Santa didn’t like that. Santa – it’s not all mistletoe and laughs at the North Pole. He works his employees hard – maybe a little bit too hard. But a lawsuit is paperwork, not kidnapping.
-<p>
-When I noticed Santa was missing:
-<p>  
-Around 12:10, when the dinner rhythm broke and everyone started hovering. In those minutes I went looking for Carola because she’d stepped away again. I wasn’t tracking Santa’s exact movements; I assumed he was in the kitchen finishing dessert.
-<p>
-Means? 
-<p>
-I have a briefcase, folders, and a stamp. My ‘tools’ are boring. If someone needed cords, straps, or disguise material, that’s not me.
-<p>
-Who I suspect: 
-<p>
-Carola. Not because she’s guilty, but because her argument with Santa was the most high‑stakes and she kept leaving the table. Also, Carola is really good friends with Rudolph…
+      I’m innocent. I arrived with Carola around 9:15 (I went to the gym first).
+      Dinner was social, but Santa and I have history because of the working-conditions dispute.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      It’s real. Rudolph asked me for legal advice and Santa didn’t like that.
+      Santa — it’s not all mistletoe and laughter at the North Pole.
+      He works his employees hard… maybe a bit too hard.
+      But a lawsuit is paperwork, not kidnapping.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:10, when the dinner rhythm broke and everyone started hovering.
+      In those minutes I went looking for Carola because she had stepped away again.
+      I wasn’t tracking Santa’s exact movements;
+      I assumed he was in the kitchen finishing dessert.
+    </p>
+    <p><strong>Means?</strong><br>
+      I have a briefcase, folders, and a stamp.
+      My “tools” are boring.
+      If someone needed cords, straps, or disguise materials — that’s not me.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Carola. Not because she’s guilty,
+      but because her argument with Santa was the most high-stakes
+      and she kept leaving the table.
+      Also… Carola is very good friends with Rudolph.
+    </p>
+  </div>
 
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente. Sono arrivato con Carola verso le 21:15
+      (prima sono passato in palestra).
+      La cena era conviviale, ma io e Babbo Natale abbiamo una storia,
+      a causa della disputa sulle condizioni di lavoro.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      È reale. Rudolph mi ha chiesto consulenza legale
+      e Babbo Natale non l’ha presa bene.
+      Al Polo Nord non è tutto vischio e risate:
+      lavora duramente i suoi dipendenti…
+      forse un po’ troppo.
+      Ma una causa legale è burocrazia, non un rapimento.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Verso le 12:10, quando il ritmo della cena si è spezzato
+      e tutti hanno iniziato ad alzarsi.
+      In quei minuti sono andato a cercare Carola,
+      perché si era allontanata di nuovo.
+      Non stavo seguendo i movimenti di Babbo Natale:
+      pensavo fosse in cucina a preparare il dessert.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Ho una valigetta, delle cartelle e un timbro.
+      I miei “strumenti” sono noiosi.
+      Se qualcuno aveva bisogno di corde, fascette o travestimenti…
+      non ero io.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Carola. Non perché sia colpevole,
+      ma perché il suo scontro con Babbo Natale
+      era quello con più conseguenze
+      e continuava ad allontanarsi dal tavolo.
+      Inoltre… Carola è molto amica di Rudolph.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
- <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -138,6 +207,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
