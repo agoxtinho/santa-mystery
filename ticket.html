@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Gift</title>
+<title>Your Gift / Il Tuo Regalo</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
 
@@ -16,6 +16,10 @@ body {
   padding: 100px 20px;
 }
 
+.language-toggle {
+  margin-bottom: 40px;
+}
+
 .ticket {
   border: 3px dashed #ffd966;
   padding: 40px;
@@ -25,7 +29,8 @@ body {
 
 .home-btn {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-right: 10px;
   padding: 12px 24px;
   background: #2ecc71;
   color: black;
@@ -46,18 +51,51 @@ body {
 
 <body>
 
-<div class="ticket">
-  <h1>🎟️ Your Gift</h1>
-  <p>You saved Christmas!</p>
-  <h2>🎁 From Ale & Hugo to Giulia & Michael 🎶</h2>
-  <br><br>
-<a href="christmas-ticket.pdf" download class="home-btn">
-  🎫 Download Your Ticket
-</a>
-
-  <!-- Back to Home Button -->
-  <a href="index.html" class="home-btn">🏠 Back to Home</a>
+<div class="language-toggle">
+  <button onclick="setLanguage('en')">English 🇬🇧</button>
+  <button onclick="setLanguage('it')">Italiano 🇮🇹</button>
 </div>
+
+<div class="ticket">
+  <h1 id="title">🎟️ Your Gift</h1>
+  <p id="message">You saved Christmas!</p>
+  <h2 id="from">🎁 From Ale & Hugo to Giulia & Michael 🎶</h2>
+  <br>
+  <a href="christmas-ticket.pdf" download class="home-btn" id="downloadBtn">
+    🎫 Download Your Ticket
+  </a>
+  <a href="index.html" class="home-btn" id="backBtn">🏠 Back to Home</a>
+</div>
+
+<script>
+let lang = 'en';
+
+const texts = {
+  en: {
+    title: "🎟️ Your Gift",
+    message: "You saved Christmas!",
+    from: "🎁 From Ale & Hugo to Giulia & Michael 🎶",
+    download: "🎫 Download Your Ticket",
+    back: "🏠 Back to Home"
+  },
+  it: {
+    title: "🎟️ Il Tuo Regalo",
+    message: "Hai salvato il Natale!",
+    from: "🎁 Da Ale & Hugo a Giulia & Michael 🎶",
+    download: "🎫 Scarica il Tuo Biglietto",
+    back: "🏠 Torna alla Home"
+  }
+};
+
+function setLanguage(l) {
+  lang = l;
+  document.getElementById('title').innerHTML = texts[l].title;
+  document.getElementById('message').innerHTML = texts[l].message;
+  document.getElementById('from').innerHTML = texts[l].from;
+  document.getElementById('downloadBtn').innerText = texts[l].download;
+  document.getElementById('backBtn').innerText = texts[l].back;
+}
+</script>
 
 </body>
 </html>
