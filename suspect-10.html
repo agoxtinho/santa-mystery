@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,44 +109,84 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🎄 Mavi</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-I’m innocent. I was the designated driver, which means I was the only one paying attention while everyone else was drinking excessive amounts of wine.
-<p>
-My conflict with Santa: 
-<p>
-I discovered he’d stolen Elena’s PANDA battery to make the sleigh faster. That’s unsafe and plain, morally, incorrect. He knows we need to get around – if his magic sleigh is defective, well, maybe he should buy a new one! But not steal the PANDA’s BATTERY!
-<p>
-When I noticed Santa was missing:
-<p>
-Around 12:10, when dessert didn’t arrive and the kitchen stayed empty. In those minutes, I saw multiple people unaccounted for: Luca and Carola weren’t at the table at one point, Giulia and Michael were busy with beanies and phones, and the hallway was effectively unobserved.
-<p>
-Also: I heard odd sounds near the reindeer stall earlier—like equipment being handled. And I saw a ‘Santa’s helper’ stumbling near the corridor, but it didn’t look like real drunkenness. No slurring—just acting.
-<p>
-Means? 
-<p>
-I carry practical emergency gear (blanket, strap). That’s for driving in snow, not kidnapping.
-<p>
-Who I suspect: 
-<p>
-Carola, because of the stall noises and her earlier argument with Santa.
+      I’m innocent. I was the designated driver, which means I was the only one paying attention
+      while everyone else was drinking excessive amounts of wine.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      I discovered he’d stolen Elena’s PANDA battery to make the sleigh faster.
+      That’s unsafe and morally wrong. If his magic sleigh is defective, maybe he should buy a new one —
+      not steal a PANDA’s battery!
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:10, when dessert didn’t arrive and the kitchen stayed empty.
+      In those minutes, several people were unaccounted for and the hallway was unobserved.
+    </p>
+    <p>
+      I also heard odd sounds near the reindeer stall earlier, like equipment being handled.
+      And I saw a “Santa’s helper” stumbling, but it looked like acting — not real drunkenness.
+    </p>
+    <p><strong>Means?</strong><br>
+      I carry emergency driving gear (blanket, strap). That’s for snow — not kidnapping.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Carola, because of the noises near the stall and her argument with Santa.
+    </p>
+  </div>
+
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente. Ero il guidatore designato, quindi l’unico davvero attento
+      mentre tutti gli altri bevevano quantità esagerate di vino.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Ho scoperto che aveva rubato la batteria della PANDA di Elena per rendere la slitta più veloce.
+      È pericoloso e moralmente sbagliato. Se la sua slitta magica è difettosa,
+      dovrebbe comprarne una nuova — non rubare la batteria di una PANDA!
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Verso le 12:10, quando il dessert non arrivava e la cucina era vuota.
+      In quei minuti diverse persone non erano al tavolo e il corridoio era incustodito.
+    </p>
+    <p>
+      Inoltre ho sentito rumori strani vicino alla stalla delle renne,
+      come se qualcuno stesse maneggiando dell’attrezzatura.
+      Ho anche visto un “aiutante di Babbo Natale” barcollare,
+      ma sembrava recitare, non davvero ubriaco.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Porto con me equipaggiamento di emergenza (coperta, cinghia) per guidare sulla neve,
+      non per rapire qualcuno.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Carola, per i rumori nella stalla e il litigio precedente con Babbo Natale.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
-  <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -139,6 +194,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
