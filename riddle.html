@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Final Riddle</title>
+<title>Final Riddle / Indovinello Finale</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
 
@@ -16,38 +16,86 @@ body {
   padding: 80px 20px;
 }
 
-input, button {
+.language-toggle {
+  margin-bottom: 30px;
+}
+
+button, input {
   padding: 12px;
   font-size: 18px;
   border-radius: 6px;
   border: none;
 }
+
 button {
   background: #ffd966;
   margin-top: 15px;
+  cursor: pointer;
+}
+
+#feedback {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ffd966;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎄 Final Riddle 🎄</h1>
+<div class="language-toggle">
+  <button onclick="setLanguage('en')">English 🇬🇧</button>
+  <button onclick="setLanguage('it')">Italiano 🇮🇹</button>
+</div>
 
-<p>
- I am tall when I am young,<br> and short when I am old. <br>What am I?,<br>
+<h1 id="title">🎄 Final Riddle 🎄</h1>
+
+<p id="riddle">
+ I am tall when I am young,<br> and short when I am old. <br>What am I?
 </p>
 
-<input id="answer" placeholder="Your answer">
+<input id="answer" placeholder="Your answer" onkeydown="if(event.key==='Enter'){check();}">
 <br>
-<button onclick="check()">Submit</button>
+<button onclick="check()" id="submitBtn">Submit</button>
+
+<div id="feedback"></div>
 
 <script>
+let lang = 'en';
+
+const texts = {
+  en: {
+    title: "🎄 Final Riddle 🎄",
+    riddle: "I am tall when I am young,<br>and short when I am old.<br>What am I?",
+    placeholder: "Your answer",
+    submit: "Submit",
+    tryAgain: "❄️ Try again!"
+  },
+  it: {
+    title: "🎄 Indovinello Finale 🎄",
+    riddle: "Sono alto quando sono giovane,<br>e corto quando sono vecchio.<br>Chi sono?",
+    placeholder: "La tua risposta",
+    submit: "Invia",
+    tryAgain: "❄️ Riprova!"
+  }
+};
+
+function setLanguage(l) {
+  lang = l;
+  document.getElementById('title').innerHTML = texts[l].title;
+  document.getElementById('riddle').innerHTML = texts[l].riddle;
+  document.getElementById('answer').placeholder = texts[l].placeholder;
+  document.getElementById('submitBtn').innerText = texts[l].submit;
+  document.getElementById('feedback').innerText = "";
+}
+
 function check() {
-  const a = document.getElementById("answer").value.toLowerCase();
-  if (a.includes("candle")) {
+  const a = document.getElementById("answer").value.toLowerCase().trim();
+  // Accept English "candle" or Italian "candela"
+  if (a.includes("candle") || a.includes("candela")) {
     window.location.href = "ticket.html";
   } else {
-    alert("❄️ Try again!");
+    document.getElementById('feedback').innerText = texts[lang].tryAgain;
   }
 }
 </script>
