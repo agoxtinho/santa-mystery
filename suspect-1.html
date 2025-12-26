@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,51 +109,76 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🎅 Giulia</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
       I’m innocent. I arrived late (about 9:15) and spent most of the night trying to keep everyone in
       one place so dinner didn’t turn into ten separate conversations in ten separate rooms.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      He wanted me to push Christmas content on social media and get people excited again.
+      But then he pushed it too far — he asked me to fake a medical certificate saying he passed
+      his eyesight exam and could safely drive the sleigh.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:05–12:15, when dessert didn’t arrive and people started asking, “Where’s Santa?”
+      In those minutes I suggested a quick beanie photo to make him stop pressuring me.
+    </p>
+    <p><strong>Means?</strong><br>
+      My “gear” is a phone tripod, ring light, and fairy-light cords for decoration.
+      It looks suspicious if you want it to, but it’s literally my work setup.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Nora. The parking dispute was intense, and she knows the sled area and side routes well.
+    </p>
+  </div>
+
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
     <p>
-      My conflict with Santa: 
-    <p>
-      He wanted me to push Christmas content on social media, get people
-      excited about Christmas again. But then, he pushed it a step too far – he asked me to fake a
-      medical certificate saying that he passed his eyesight exam, and that he could safely drive the
-      sleigh.
-    <p>
-      When I noticed Santa was missing: 
-    <p>
-      Around 12:05–12:15, when dessert didn’t arrive and people
-      started asking, ‘Where’s Santa?’ In those minutes I suggested a quick beanie photo because I
-      wanted Santa to leave me alone and stop pressing me about the fake medical certificate… This
-      was a good way to get him to stop speaking to me.
-    <p>
-      Means?
-    <p>
-      My ‘gear’ is a phone tripod/ring light and some fairy‑light cord for decoration. It looks
-      suspicious if you want it to, but it’s literally what I use for content.
-    <p>
-      Who I suspect: 
-    <p>
-      Nora. The parking dispute was intense, and she knows the sled area and side
-      routes. If someone wanted to ‘teach Santa a lesson’ without being seen, she had a reason.
+      Sono innocente. Sono arrivata tardi (verso le 21:15) e ho passato gran parte della serata
+      cercando di tenere tutti nello stesso posto per evitare dieci conversazioni diverse in dieci stanze diverse.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Voleva che spingessi contenuti natalizi sui social per riaccendere l’entusiasmo.
+      Poi però ha esagerato: mi ha chiesto di falsificare un certificato medico dicendo
+      che aveva superato l’esame della vista e poteva guidare la slitta.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Tra le 12:05 e le 12:15, quando il dessert non arrivava e la gente iniziava a chiedere
+      “Dov’è Babbo Natale?”. In quei minuti ho proposto una foto con i cappellini
+      per farlo smettere di insistere.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      La mia “attrezzatura” è un treppiede per il telefono, una ring light
+      e fili di lucine decorative. Può sembrare sospetto, ma è il mio lavoro.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Nora. La discussione sul parcheggio è stata intensa e lei conosce bene l’area delle slitte e i percorsi laterali.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
- <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -146,6 +186,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
