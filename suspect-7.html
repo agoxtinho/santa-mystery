@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,43 +109,92 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>❄️ Nora</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-      I’m innocent. Yes, I argued with Santa about parking his sleigh in my parking garage without paying.
-<p>
-My conflict with Santa:
-<p>
-He acted like rules don’t apply to him. I told him they do. The parking garage is my work! Employees and bills need to be paid. Next thing I know, the Befana will want to park for free as well…
-<p>
-When I noticed Santa was missing: 
-<p>
-Around 12:05–12:20, when dessert was delayed and people started asking questions. In those minutes I heard the corridor chime and saw the hallway door open. I also noticed someone in an elf apron hovering near the corridor—acting tipsy, but… oddly controlled.
-<p>
-Means? 
-<p>
-I had a tow rope and a flashlight because I’m practical. But a rope doesn’t equal guilt; it equals ‘I live in a world with snow and stuck things.’
-<p>
-Who I suspect: 
-<p>
-Giulia. She controlled the room’s attention with that photo moment. If someone wanted to move unseen, that distraction was perfect.
+      I’m innocent. Yes, I argued with Santa about parking his sleigh
+      in my parking garage without paying.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      He acted like rules didn’t apply to him.
+      I reminded him that they do.
+      The garage is my workplace — employees and bills need to be paid.
+      Next thing you know, the Befana will want to park for free too.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Between 12:05 and 12:20, when dessert was delayed
+      and people started asking questions.
+      I heard the corridor chime and saw the hallway door open.
+      I also noticed someone in an elf apron nearby —
+      acting tipsy, but oddly controlled.
+    </p>
+    <p><strong>Means?</strong><br>
+      I had a tow rope and a flashlight because I’m practical.
+      A rope doesn’t mean guilt —
+      it means I live in a world with snow and stuck vehicles.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Giulia. She controlled the room’s attention
+      with the photo moment.
+      If someone wanted to move unseen,
+      that distraction was perfect.
+    </p>
+  </div>
 
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente. Sì, ho discusso con Babbo Natale
+      perché ha parcheggiato la slitta nel mio garage senza pagare.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Si comportava come se le regole non si applicassero a lui.
+      Io gli ho ricordato che invece sì.
+      Il garage è il mio lavoro — ci sono dipendenti e bollette da pagare.
+      A questo punto anche la Befana vorrà parcheggiare gratis.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Tra le 12:05 e le 12:20, quando il dolce tardava
+      e la gente iniziava a fare domande.
+      Ho sentito il campanello del corridoio
+      e visto aprirsi la porta.
+      Ho notato anche qualcuno con un grembiule da elfo —
+      sembrava ubriaco, ma fin troppo controllato.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Avevo una corda da traino e una torcia perché sono pratica.
+      Una corda non significa colpevolezza —
+      significa vivere in un mondo con neve e cose bloccate.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Giulia. Ha catalizzato l’attenzione di tutti
+      con il momento delle foto.
+      Se qualcuno voleva muoversi senza farsi notare,
+      quella distrazione era perfetta.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
-  <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -138,6 +202,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
