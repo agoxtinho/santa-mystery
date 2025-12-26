@@ -17,7 +17,7 @@ body {
 
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .nav a {
@@ -25,6 +25,21 @@ body {
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .container {
@@ -94,43 +109,94 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🦌 Carola</h1>
 
-  <div class="testimony">
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
     <p>
-     I’m innocent. I arrived with Luca around 9:15. Yes, Santa and I stepped away to talk privately. He was upset about my reindeer research and I was upset that he was oversimplifying it.
-   <p>
-      My conflict with Santa: 
-<p>
-He threatened to ‘tell his version of the story’ about my medical research – but I’ve got nothing to hide, so that didn’t upset me. I told him he should go ahead: the facts speak for themselves. I’m trying to cure life-threatening diseases!
-<p>
-When I noticed Santa was missing:
-<p>
-Around 12:10–12:20, when I came back and realized dessert was happening without Santa. In those minutes I heard strange sounds near the reindeer stall—more like equipment being moved than animals. I went to check, then returned to the dining room.
-<p>
-Means? 
-<p>
-I carry a medical kit because that’s my work. It looks dramatic, but it’s standard supplies. If you’re imagining sedation, you’re imagining too much.
-<p>
-Who I suspect: 
-<p>
-Mavi. She was the only sober person who could move people around efficiently, and she had strong feelings about the the fact that Santa stole the PANDA’s battery and put it on his sleigh.
+      I’m innocent. I arrived with Luca around 9:15. Yes, Santa and I stepped away to talk privately.
+      He was upset about my reindeer research, and I was upset that he was oversimplifying it.
+    </p>
+    <p><strong>My conflict with Santa:</strong><br>
+      He threatened to “tell his version of the story” about my medical research.
+      But I have nothing to hide, so that didn’t upset me.
+      I told him to go ahead — the facts speak for themselves.
+      I’m trying to cure life-threatening diseases.
+    </p>
+    <p><strong>When I noticed Santa was missing:</strong><br>
+      Around 12:10–12:20, when I came back and realized dessert was being served without Santa.
+      In those minutes I heard strange sounds near the reindeer stall —
+      more like equipment being moved than animals.
+      I went to check, then returned to the dining room.
+    </p>
+    <p><strong>Means?</strong><br>
+      I carry a medical kit because that’s my work.
+      It looks dramatic, but it’s standard equipment.
+      If you’re imagining sedation, you’re imagining too much.
+    </p>
+    <p><strong>Who I suspect:</strong><br>
+      Mavi. She was the only sober person,
+      able to move people around efficiently,
+      and she had very strong feelings about Santa stealing the PANDA’s battery
+      to power his sleigh.
+    </p>
+  </div>
 
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>
+      Sono innocente. Sono arrivata con Luca verso le 21:15.
+      Sì, io e Babbo Natale ci siamo allontanati per parlare in privato.
+      Lui era contrariato per la mia ricerca sulle renne,
+      io perché la stava semplificando eccessivamente.
+    </p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>
+      Ha minacciato di “raccontare la sua versione dei fatti”
+      sulla mia ricerca medica.
+      Ma non ho nulla da nascondere, quindi non mi ha turbata.
+      Gli ho detto di farlo pure: i fatti parlano da soli.
+      Sto cercando di curare malattie mortali.
+    </p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>
+      Tra le 12:10 e le 12:20, quando sono rientrata
+      e ho visto che il dessert veniva servito senza Babbo Natale.
+      In quei minuti ho sentito strani rumori vicino alla stalla delle renne —
+      più come attrezzatura spostata che animali.
+      Sono andata a controllare, poi sono tornata in sala.
+    </p>
+    <p><strong>Mezzi?</strong><br>
+      Porto con me un kit medico per lavoro.
+      Può sembrare inquietante, ma sono strumenti standard.
+      Se state immaginando sedazioni… state esagerando.
+    </p>
+    <p><strong>Chi sospetto:</strong><br>
+      Mavi. Era l’unica sobria,
+      capace di spostare le persone in modo efficiente,
+      e aveva sentimenti molto forti riguardo al fatto
+      che Babbo Natale avesse rubato la batteria della PANDA
+      per alimentare la slitta.
     </p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
- <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -138,6 +204,16 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
