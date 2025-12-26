@@ -14,25 +14,34 @@ body {
   font-family: 'Mountains of Christmas', cursive;
   padding: 40px 20px;
 }
-
 .nav {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
-
 .nav a {
   color: #ffd966;
   margin: 0 6px;
   text-decoration: none;
   font-weight: bold;
 }
-
+.lang-toggle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.lang-toggle button {
+  background: #ffd966;
+  border: none;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+}
 .container {
   max-width: 700px;
   margin: auto;
   text-align: center;
 }
-
 .testimony {
   background: rgba(0,0,0,0.35);
   padding: 25px;
@@ -40,7 +49,6 @@ body {
   font-size: 20px;
   text-align: left;
 }
-
 .accuse {
   display: block;
   margin: 40px auto;
@@ -55,19 +63,16 @@ body {
   box-shadow: 0 0 15px rgba(255,59,59,0.6);
   animation: pulse 1.5s infinite;
 }
-
 @keyframes pulse {
   0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,59,59,0.6); }
   50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,59,59,0.9); }
   100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,59,59,0.6); }
 }
-
 .result {
   display: none;
   margin-top: 30px;
   font-size: 22px;
 }
-
 .back {
   display: inline-block;
   margin-top: 20px;
@@ -94,43 +99,45 @@ body {
   <a href="suspect-10.html">🎄 Mavi</a>
 </nav>
 
+<div class="lang-toggle">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('it')">IT</button>
+</div>
+
 <div class="container">
   <h1>🧸 Elena</h1>
 
-  <div class="testimony">
-    <p>
-      I’m innocent. I drank two bottles of wine and Giulia taught me swing dancing moves (which, on hindsight, wasn’t such a good idea after drinking so much).
-<p>
-My conflict with Santa: 
-<p>
-None. I just wanted to paaaaarty.
-<p>
-When I noticed Santa was missing: 
-<p>
-Sometime around 12:15 when we sat back down and dessert still wasn’t there. In those minutes, I remember everyone laughing for a photo and then suddenly doing the ‘looking around’ thing. I also remember Hugo going very quiet earlier when people praised the lasagne and the sonhos.
-<p>
-Means?
-<p>
- I only brought my car keys, and kept them in my pocket.
-<p>
-Who I suspect: 
-<p>
-Hugo. Not because I saw him do anything, but because he looked really upset when people started saying that Santa’s a better chef than Hugo…
+  <!-- ENGLISH -->
+  <div class="testimony" data-lang="en">
+    <p>I’m innocent. I drank two bottles of wine and Giulia taught me swing dancing moves (probably not a good idea after so much wine).</p>
+    <p><strong>My conflict with Santa:</strong><br>None. I just wanted to paaaaarty!</p>
+    <p><strong>When I noticed Santa was missing:</strong><br>Around 12:15 when we sat back down and dessert wasn’t there yet. I noticed everyone laughing for a photo and then doing the “looking around” thing. Hugo also went quiet earlier when people praised Santa’s cooking.</p>
+    <p><strong>Means?</strong><br>I only brought my car keys, kept in my pocket.</p>
+    <p><strong>Who I suspect:</strong><br>Hugo. Not because I saw him do anything, but he looked really upset when people said Santa was a better chef.</p>
+  </div>
 
-    </p>
+  <!-- ITALIAN -->
+  <div class="testimony" data-lang="it">
+    <p>Sono innocente. Ho bevuto due bottiglie di vino e Giulia mi ha insegnato passi di swing (probabilmente non una buona idea dopo tanto vino).</p>
+    <p><strong>Il mio conflitto con Babbo Natale:</strong><br>Nessuno. Volevo solo fare festa!</p>
+    <p><strong>Quando ho notato la scomparsa:</strong><br>Intorno alle 12:15 quando ci siamo seduti e il dessert non era ancora arrivato. Ho notato tutti ridere per una foto e poi guardarsi intorno. Hugo è anche diventato silenzioso quando la gente lodava la cucina di Santa.</p>
+    <p><strong>Mezzi?</strong><br>Ho portato solo le chiavi della macchina, che tenevo in tasca.</p>
+    <p><strong>Chi sospetto:</strong><br>Hugo. Non perché l’abbia visto fare qualcosa, ma sembrava molto contrariato quando dicevano che Santa cucinava meglio di lui.</p>
   </div>
 
   <button onclick="accuse()" class="accuse">
-    👉 ACCUSE THIS SUSPECT
+    👉 <span data-lang="en">ACCUSE THIS SUSPECT</span>
+    👉 <span data-lang="it">ACCUSA QUESTO SOSPETTO</span>
   </button>
 
- <!-- Result message -->
-<div class="result" id="result" style="display:none;">
-  ❄️ Nice try… this suspect is innocent.
-</div>
+  <div class="result" id="result">
+    <span data-lang="en">❄️ Nice try… this suspect is innocent.</span>
+    <span data-lang="it">❄️ Bel tentativo… questo sospetto è innocente.</span>
+  </div>
 
-<!-- Back to suspects link (always visible) -->
-<a href="index.html" class="back">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="en">← Back to suspects</a>
+  <a href="index.html" class="back" data-lang="it">← Torna ai sospetti</a>
+</div>
 
 <script>
 function accuse() {
@@ -138,6 +145,17 @@ function accuse() {
     document.getElementById("result").style.display = "block";
   }
 }
+
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  localStorage.setItem('lang', lang);
+}
+
+// Load preferred language from localStorage
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
